@@ -7,21 +7,31 @@ export class DashboardPage {
     this.page = page;
   }
 
-  sidebarButton(name: string): Locator {
-    return this.page.locator(`button[data-tooltip-id*="${name.toLowerCase()}"]`);
+  sidebarButton(label: string): Locator {
+    return this.page.getByRole('button', { name: label });
   }
 
-  async clickSidebarItem(name: string) {
-    await this.sidebarButton(name).click();
+  async navigateToSection(label: string) {
+    const btn = this.sidebarButton(label);
+    await btn.waitFor({ state: 'visible' });
+    await btn.click();
   }
 
-  async assertSidebarItemVisible(name: string) {
-    await this.sidebarButton(name).waitFor({ state: 'visible' });
-  }
-
-  async validateSidebarItems(expectedItems: string[]) {
-    for (const item of expectedItems) {
-      await this.assertSidebarItemVisible(item);
+  async expectSidebarItemsVisible(labels: string[]) {
+    for (const label of labels) {
+      await this.sidebarButton(label).waitFor({ state: 'visible' });
     }
+  }
+
+  async isGreetingVisible(): Promise<boolean> {
+    return await this.page.getByText('How can I help you today?').isVisible();
+  }
+
+  getNewVisitButton(): Locator {
+    return this.page.locator('#twid_new_visit_button');
+  }
+
+  async startNewVisit() {
+    await this.getNewVisitButton().click();
   }
 }
