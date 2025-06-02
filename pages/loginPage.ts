@@ -16,7 +16,6 @@ export class LoginPage {
     this.passwordInput = page.getByPlaceholder('Password');
     this.submitButton = page.getByRole('button', { name: 'Login' });
     this.sidebar = page.locator('nav, aside');
-    // this.header = page.locator('header');
     this.header = page.getByRole('img', { name: 'Sully.ai' });
   }
 
@@ -28,5 +27,10 @@ export class LoginPage {
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
     await this.submitButton.click();
+  }
+
+  async loginSuccessfully() {
+    await this.login(process.env.EMAIL!, process.env.PASSWORD!);
+    await this.page.getByText('How can I help you today?').waitFor();
   }
 }

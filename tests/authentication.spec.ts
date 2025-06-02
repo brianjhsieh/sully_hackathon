@@ -17,6 +17,14 @@ test.describe('Sully AI App', () => {
     await expect(sully.submitButton).toBeVisible();
   });
 
+    test('should login with correct credentials', async ({ page }) => {
+    const sully = new LoginPage(page);
+    await sully.goto();
+    await sully.login(process.env.EMAIL!, process.env.PASSWORD!);
+    await sully.loginSuccessfully();
+    await page.getByText('How can I help you today?').waitFor();
+  });
+
   test('should not login with invalid credentials', async ({ page }) => {
     const sully = new LoginPage(page);
     await sully.goto();
