@@ -1,6 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 
-export class SullyAppPage {
+export class LoginPage {
   readonly page: Page;
   readonly loginButton: Locator;
   readonly emailInput: Locator;
