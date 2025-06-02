@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 
-test.describe('Sully AI App', () => {
+test.describe('Main Page', () => {
   test('should load the main page', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.goto();
@@ -31,6 +31,4 @@ test.describe('Sully AI App', () => {
     await loginPage.login('invalid@example.com', 'wrongpassword');
     await expect(page.getByText('Something went wrong!')).toBeVisible();
   });
-
-  // Add more tests as needed, e.g., navigation, sidebar, etc.
 });

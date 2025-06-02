@@ -1,10 +1,16 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class DashboardPage {
   readonly page: Page;
+  readonly newPatientNamePopup: Locator;
+  readonly newPatientNameInput: Locator;
+  readonly newPatientNameSubmitButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
+    this.newPatientNamePopup = page.getByText('Patient NamePleaseAdd');
+    this.newPatientNameInput = page.locator('#patientName');
+    this.newPatientNameSubmitButton = page.getByRole('button', { name: 'Continue' });
   }
 
   sidebarButton(label: string): Locator {
@@ -34,4 +40,17 @@ export class DashboardPage {
   async startNewVisit() {
     await this.getNewVisitButton().click();
   }
+
+  async selectExistingPatient(name: string) {
+    const existingPatientCard = this.page.locator('#twid_existing_patient_card');
+    await expect(existingPatientCard).toBeVisible();
+
+    const searchInput = existingPatientCard.getByRole('combobox', { name: /search or create patient/i });
+    await searchInput.click(); // triggers dropdown
+
+    const patientOption = this.page.getByRole('option', { name: `TP ${name}` });
+    await expect(patientOption).toBeVisible();
+    await patientOption.click();
+  }
+
 }
