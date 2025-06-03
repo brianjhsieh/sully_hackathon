@@ -1,4 +1,4 @@
-# sully_hackathon
+# Sully.AI QA Hackathon
 
 ## TEST PLAN
 
@@ -41,4 +41,17 @@ Testing of the web application follows the "Practical Test Pyramid" approach, em
   - Data privacy and input validation
 
 ## RELEASE PLAN
-![SDLC Diagram](./SDLC.png)
+
+### Standard CI/CD Loop for Agile Software Development Lifecycle
+
+![CI/CD Diagram](./cicd.png)
+*Figure: Example CI/CD pipeline for Agile SDLC.*
+
+**Plan:** Requirements gathering and sprint planning  
+**Code:** Feature implementation (design, architecture, unit testing)  
+**Build:** Linting, code coverage gates, source code compilation, dockerization  
+**Test:** Various manual/automated tests (functionality, integration, E2E, release)  
+**Release:** Prep for release (notify any third party, create release notes)  
+**Deploy:** Deploy code to servers (K8s container / VM / etc, canary or blue-green deploy)  
+**Operate:** Ensure infrastructure configuration and stability  
+**Monitor:** Monitor application performance and review any alerts
