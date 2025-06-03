@@ -1,4 +1,3 @@
-// tests/start-visit.spec.ts
 import { test, expect } from '@playwright/test';
 import { VisitPage } from '../pages/VisitPage';
 import { LoginPage } from '../pages/LoginPage';
