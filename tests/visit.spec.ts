@@ -1,8 +1,8 @@
 // tests/start-visit.spec.ts
 import { test, expect } from '@playwright/test';
-import { VisitPage } from '../pages/VisitPage'; // Adjust path as needed
-import { LoginPage } from '../pages/LoginPage'; // Assuming you have a login POM
-import { DashboardPage } from '../pages/DashboardPage'; // Assuming intermediate step before VisitPage
+import { VisitPage } from '../pages/VisitPage';
+import { LoginPage } from '../pages/LoginPage';
+import { DashboardPage } from '../pages/DashboardPage';
 
 test.describe('Visit Page', () => {
     test('Start a new visit using voice recording', async ({ page }) => {
