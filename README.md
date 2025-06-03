@@ -55,3 +55,12 @@ Testing of the web application follows the "Practical Test Pyramid" approach, em
 **Deploy:** Deploy code to servers (K8s container / VM / etc, canary or blue-green deploy)  
 **Operate:** Ensure infrastructure configuration and stability  
 **Monitor:** Monitor application performance and review any alerts
+
+Since agile methodologies generally practice a shift-left mentality and encourage quick, consistent deployments, a twice-weekly deployment schedule is both practical and effective. High test coverage—especially through automated E2E tests—provides strong confidence in release quality.
+
+**Common CI/CD and DevOps Tools that I use very frequently:**
+- Jenkins (automation server for CI/CD pipelines)
+- Docker (containerization and versioning)
+- Kubernetes (K8s, for orchestration)
+- Artifactory (artifact repository)
+- JIRA (issue and project tracking and stakeholder communication)
