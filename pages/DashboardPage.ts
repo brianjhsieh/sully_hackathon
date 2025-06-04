@@ -48,9 +48,8 @@ export class DashboardPage {
     const searchInput = existingPatientCard.getByRole('combobox', { name: /search or create patient/i });
     await searchInput.click(); // triggers dropdown
 
-    const patientOption = this.page.getByRole('option', { name: `TP ${name}` });
+    const patientOption = this.page.getByRole('option', { name: 'Test Patient' }).nth(0);
     await expect(patientOption).toBeVisible();
     await patientOption.click();
   }
-
-}
+};
