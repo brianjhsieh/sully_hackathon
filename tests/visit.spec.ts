@@ -20,11 +20,12 @@ test.describe('Visit Page', () => {
         // Start in-person visit
         await visitPage.startInPersonVisit();
 
-        // TODO: Audio streaming to microphone is not implemented yet
-        // Expected to use "clean.m4a"
+        // Wait for the transcript to update
+        await expect(visitPage.transcriptTextarea).toHaveValue(/headache/i, { timeout: 60000 });
 
-        const transcript = await expect(visitPage.transcriptTextarea).not.toBeEmpty();
-        expect(transcript).toContain('headache');
+        // Finish the visit and check to see if note is generated
+        await visitPage.finishVisitButton.click();
+        await expect(visitPage.viewNoteButton).toBeVisible({ timeout: 10000 });
     });
 
     test('Start a new visit using voice recording with empty audio', async ({ page }) => {
@@ -43,10 +44,17 @@ test.describe('Visit Page', () => {
         // Start in-person visit
         await visitPage.startInPersonVisit();
 
-        // TODO: Audio streaming to microphone is not implemented yet
-        // Expected to use "silence.m4a"
-
+        // No transcript should be generated for empty audio
         const transcript = await expect(visitPage.transcriptTextarea).toBeEmpty();
+
+        // Prematurely finish the visit
+        await visitPage.finishVisitButton.click();
+
+        // Alert popup should appear
+        await visitPage.alertPopupButton.click();
+
+        // Should be directed back to the main page
+        await page.getByText('How can I help you today?').waitFor();
     });
 
     test('Start a new visit using manually added notes', async ({ page }) => {

@@ -1,19 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
+import path from 'path';
 
 dotenv.config();
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  timeout: 60000,
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -32,11 +27,12 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    headless: false,
     launchOptions: {
       args: [
         '--use-fake-device-for-media-stream',
         '--use-fake-ui-for-media-stream',
-        '--use-file-for-fake-audio-capture=test-data/sample.wav'
+        `--use-file-for-fake-audio-capture=${path.resolve(__dirname, 'test-data/clean.wav')}`
       ]
     },
     permissions: ['microphone'],
